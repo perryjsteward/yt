@@ -46,6 +46,7 @@ meetings; the rest add breadth.
 | **`/setup`** | What's connected and which account each connector is signed into, your active workspace and project, missing tool groups, and your writing voice for drafts |
 | **`/create-project <url>`** | Research a startup and create its project with the right interests |
 | **`/add-user`** | Invite the founder into their project as editor or viewer |
+| `/invite-founder` | Platform admins: invite a founder you met to make their own free account, after checking (and if thin, growing) the investors Yellowtail has for them |
 | **`/create-pipeline`** | Set up a round: target in its own currency, round details, stages, and its dates on the round's timeline |
 
 **Investors**

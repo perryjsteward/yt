@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0 (3 Nov 2026)
+
+- **`/invite-founder`** (platform admins): invite a founder you met to make their own free Yellowtail account. It saves the invite as a draft, reads their website for sector, stage and geography, checks how many investors in Yellowtail fit, researches and files more when coverage is thin (as `/find-investors` does), then sends the invite on your yes. Their ten free investors are picked once, at onboarding, so the research comes first. Uses the new join-invite tools.
+
 ## 0.7.6 (19 Oct 2026)
 
 - Lives in its own private `perryjsteward/yt` repository, with the `yellowtail-club` marketplace at the root. Plugin source, validation and releases are independent of the app repository. Command names and existing practice files are preserved.
