@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.0 (3 Nov 2026)
+
+- **`/fulfil-orders`** (platform admins): work the order queue. When a customer buys their investor list or the annual licence, Yellowtail makes an order due in 48 hours, carrying a brief of the project and its interests frozen at purchase. This picks up the next one, builds a List in the customer's project of the 200 investors that fit the brief best (filing new firms from research where the catalog is thin, as `/find-investors` does), gives it a pass over, and delivers the order with that List, which emails the customer a link to it. Runs unattended on a schedule (`--deliver`), leaves an order it can't fill in progress with a note, and skips upgrades (the licence on top of a project's list), which have nothing to build. Uses the new order tools.
+
 ## 0.8.0 (3 Nov 2026)
 
 - **`/invite-founder`** (platform admins): invite a founder you met to make their own free Yellowtail account. It saves the invite as a draft, reads their website for sector, stage and geography, checks how many investors in Yellowtail fit, researches and files more when coverage is thin (as `/find-investors` does), then sends the invite on your yes. Their ten free investors are picked once, at onboarding, so the research comes first. Uses the new join-invite tools.

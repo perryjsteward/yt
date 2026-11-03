@@ -47,6 +47,7 @@ meetings; the rest add breadth.
 | **`/create-project <url>`** | Research a startup and create its project with the right interests |
 | **`/add-user`** | Invite the founder into their project as editor or viewer |
 | `/invite-founder` | Platform admins: invite a founder you met to make their own free account, after checking (and if thin, growing) the investors Yellowtail has for them |
+| `/fulfil-orders` | Platform admins: work the order queue — build each customer's paid investor list to its target (200), give it a pass over, and deliver it, which emails them; runs unattended on a schedule |
 | **`/create-pipeline`** | Set up a round: target in its own currency, round details, stages, and its dates on the round's timeline |
 
 **Investors**

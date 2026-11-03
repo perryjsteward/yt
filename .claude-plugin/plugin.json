@@ -1,7 +1,7 @@
 {
   "name": "yt",
   "displayName": "Yellowtail Club",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Yellowtail Club core skills for the Yellowtail MCP: manage workspaces, projects, investors, contacts, lists, pipelines and deals; research investors, run client rounds, and bring email, calendar and meeting notes back into Yellowtail.",
   "author": {
     "name": "Yellowtail",

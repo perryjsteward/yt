@@ -107,6 +107,7 @@ Short names here; write them in full (`/yt:find-investors`) in the answer.
 | Set up a new client startup | `/create-project [url]` | `/add-user`, `/create-pipeline` | a workspace with room |
 | Give the founder access | `/add-user` | | owner or admin of the workspace |
 | Invite a founder you met to try Yellowtail themselves | `/invite-founder` | | a platform admin |
+| Deliver the investor lists customers have paid for | `/fulfil-orders` | | a platform admin |
 | Plan the round: size, instrument, sequence, dates | `/round-strategy` | `/create-pipeline` | a project |
 | Start the round itself | `/create-pipeline` | `/find-investors` | a project |
 | Find investors who fit | `/find-investors` | `/add-to-pipeline` or `/add-to-list` | project interests |
