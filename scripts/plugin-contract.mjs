@@ -18,7 +18,8 @@ export function markdownFiles(dir) {
 }
 export function contract() {
   const tools = [];
-  for (const file of markdownFiles(root)) {
+  // The changelog is history: a tool it names may have moved to another plugin since.
+  for (const file of markdownFiles(root).filter(f => !f.endsWith('CHANGELOG.md'))) {
     for (const [, tool] of readFileSync(file, 'utf8').matchAll(/`([a-z][a-z_]+)(?:[ (`{]|`)/g)) {
       if (toolVerb.test(tool) && !external.has(tool)) tools.push({ file: relative(root, file), tool });
     }

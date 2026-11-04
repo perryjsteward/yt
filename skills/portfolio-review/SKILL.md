@@ -31,7 +31,7 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` first.
 1. **Scope.** `whoami`. The workspace named, else the one with the most projects where the user is
    a member (ask if two are close). Every project in it is a client, except a project named
    "Yellowtail Raise" (the advisor's own pipeline) unless `--include-practice`. Say "N clients".
-   (`list_projects` is desk-only; `whoami` is the list.)
+   (`whoami` is the list of projects you can reach.)
 2. **The rounds.** `list_pipelines` per project. A client with no `raising` pipeline is listed in
    one line by status (planning: "not launched"; closed: "closed") and not read further.
 3. **Read each raising round.** All deals (open, won, lost); counts.

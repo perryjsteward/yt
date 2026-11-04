@@ -129,7 +129,7 @@ afterwards (`/add-to-pipeline`).
     else:
     - **Candidates** from firms carrying the parent tag (`list_companies` with `kind: "investor"`
       and `tags` the parent's id; a parent filter includes its children) and from the research
-      notes you already have (`search_notes` for the tag's words).
+      notes you already have (`list_project_notes` with the tag's words as `query.q`).
     - **Check each one** against the firm's own description and portfolio (`get_company`, its
       `notable_investments`, its site when they are thin). A tag goes on only with a sentence that
       supports it; "parent tag matches" is not a reason.

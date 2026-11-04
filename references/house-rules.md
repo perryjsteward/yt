@@ -57,7 +57,7 @@ draft of its own.
 catalog grows with every search, it files each new investor firm its shortlist keeps, without a
 card: the firm only (no people, no new tags), only when the `file_investor` dry run passes with no
 duplicates, and with a profile note whose first line is `Auto-filed by /find-investors, unreviewed`,
-which is how the desk finds them to check (`search_notes`, `/crm-hygiene --catalog`). Its header
+which is how the desk finds them to check (`/yt-admin:catalog-hygiene`). Its header
 says how many it filed. No other skill files without a card.
 
 ## 3. Yellowtail first, web second

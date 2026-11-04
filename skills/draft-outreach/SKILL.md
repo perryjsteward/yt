@@ -28,7 +28,7 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` first.
 | `get_deal` | Contacts, notes and comment thread: has anyone written already? | when a deal exists |
 | `comment_on_deal` | Log the outreach — card first | on approve |
 | `update_deal` | `{ id, changes: { nextStep, nextStepOn } }`: the follow-up date, on the same card | on approve |
-| `list_project_notes`, `search_notes`, `get_note` | The saved writing-voice note from `/setup`; the client's **Founder voice** note when drafting as the founder | optional |
+| `list_project_notes`, `get_note` | The saved writing-voice note from `/setup`; the client's **Founder voice** note when drafting as the founder | optional |
 | `get_list`, `list_companies` | Likely targets for a warm ask: firms on the round, firms in the connector's portfolio's co-investors | warm mode |
 | Email (Gmail `search_threads`, `get_thread`, `create_draft`) | Prior threads, the sender's voice, the draft | optional; paste-ready text otherwise |
 | Web | A thesis quote, a recent post or deal, when Yellowtail has no hook — sourced | optional |
@@ -65,7 +65,7 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` first.
 6. **Learn the voice.** Whose mailbox is it going from?
    - **The founder's** (`--as-founder`, or an advisor drafting for the client to send): read the
      client's **Founder voice** project note, if one exists (`list_project_notes { projectId,
-     query: { q: "Founder voice" } }` or `search_notes`, then `get_note`; its body starts
+     query: { q: "Founder voice" } }`, then `get_note`; its body starts
      `Founder voice:`). Match it. None → say so, write plainly, and suggest saving two or three of
      the founder's own emails as that note. **The first batch goes to the founder for approval**
      before anything is sent: say so on the cards, and offer one email to the founder with the

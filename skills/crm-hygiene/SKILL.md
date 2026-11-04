@@ -1,7 +1,7 @@
 ---
 name: crm-hygiene
-description: Yellowtail Club — Data-health check for one Yellowtail project — deals with no primary contact, no or overdue next step, stuck, or no value; primary contacts missing email, a verified email, LinkedIn, X, phone or location; people with no firm; likely duplicates; deals on firms outside the project's interests; and plan vs record (overdue milestones, deals closing after legal close, a raising round with no timeline). Reports with counts and links, then proposes fixes as cards (next step, value, primary contact, contact details, tags). Never deletes; merges only in the platform admins' catalog mode, which sweeps the whole catalog for duplicate firms and people and proposes merge cards, dry run first. Works on any project, including the practice. Use when someone says "clean up the CRM", "CRM hygiene", "data health", "what's missing on my deals", "audit the pipeline data", "find duplicates", "which deals have no contact", or before a round review or a hand-over.
-argument-hint: "[pipeline name | --all-pipelines] [--stale 14] [--fix] [--catalog, platform admins]"
+description: Yellowtail Club — Data-health check for one Yellowtail project — deals with no primary contact, no or overdue next step, stuck, or no value; primary contacts missing email, a verified email, LinkedIn, X, phone or location; people with no firm; likely duplicates; deals on firms outside the project's interests; and plan vs record (overdue milestones, deals closing after legal close, a raising round with no timeline). Reports with counts and links, then proposes fixes as cards (next step, value, primary contact, contact details, tags). Never deletes or merges: duplicates are reported for the Yellowtail team to merge. Works on any project, including the practice. Use when someone says "clean up the CRM", "CRM hygiene", "data health", "what's missing on my deals", "audit the pipeline data", "find duplicates", "which deals have no contact", or before a round review or a hand-over.
+argument-hint: "[pipeline name | --all-pipelines] [--stale 14] [--fix]"
 ---
 
 # /crm-hygiene
@@ -10,8 +10,8 @@ Every other skill trusts the data: `/round-forecast` needs values and next steps
 needs a primary contact with an email, `/find-investors` needs the catalog free of two copies of the
 same fund. This skill finds what's missing or wrong, says how much of it there is, and fixes what
 can be fixed from evidence — on a card, after approval. Deletes and merges are not available to
-customers; in a project run, duplicates are reported, not removed. A platform admin's
-**`--catalog`** run (below) sweeps the whole catalog for duplicates and merges firms on approval.
+customers; duplicates are reported, not removed, and the Yellowtail team merges them across the
+whole catalog (its desk plugin's `/catalog-hygiene`).
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` first.
 
@@ -33,8 +33,6 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` first.
 | `file_investor` / `file_account` | Fill or verify a person's contact details, attach a person to a firm, tag a firm: `workspaceId`, `company: { id, tags? }`, `people: [{ id, update: { email, emailStatus, linkedinUrl, linkedinStatus, twitterHandle, phone, phoneStatus, locationCity, locationCountry, sources } }]`; `dryRun: true` first. Any member may do this on an investor in the shared catalog; an account card only touches the workspace's own | on approval |
 | `create_tag` | `{ kind, name, parentId? }`: an approved **New tags** line (house rules §12). Anyone: industry (with its group) and focus; other kinds: platform admins only | on approval |
 | `find_email`, `verify_email` | Hunter through Yellowtail, for a primary contact's missing or unverified email (spends the workspace's quota) | when the workspace has a key |
-| `list_companies`, `list_people`, `merge_companies` | `--catalog` only (platform admins): the sweep and the merge, `dryRun` defaulting to true | admin, on approval |
-| `search_notes` | `--catalog` only: the firms `/find-investors` filed unreviewed (step 8) | admin |
 | Email (Gmail `search_threads`) | Evidence for a next step, or a verified email from a signature | optional |
 | Web search; enrichment (Hunter, Apollo, Clay) | The contact search for a primary contact's missing fields | when filling contacts |
 
@@ -98,7 +96,7 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` first.
      set them. A doc whose dates differ → say which is right, per the milestone's history, and
      offer a fresh doc from `/close-plan`.
    - **Duplicates / outside interests**: no fix here. Duplicates are listed for the Yellowtail team
-     to merge (a platform admin can run `--catalog`); a deal outside interests is a question for the
+     to merge (the Yellowtail team merges them); a deal outside interests is a question for the
      user — it may be deliberate.
 6. **Cards** (one per deal or person), `dryRun: true` for every `file_*` card first. A person the dry
    run won't let this workspace update: say so, and leave it for the Yellowtail team.
@@ -151,65 +149,17 @@ Clean     · 22 of 41 deals
 
 | Deal | Issues | Suggested fix | Source |
 …
-Likely duplicates (for the Yellowtail team: `/crm-hygiene --catalog`)
+Likely duplicates (for the Yellowtail team to merge)
 - "Northwind Capital" (this workspace) ↔ "Northwind Capital Partners" (shared) — same domain northwind.vc
 ```
 
 Link deals `/pipelines?pipeline={pipelineId}&deal={dealId}`, people `/investors/people/{personId}`,
 firms `/investors/{companyId}`.
 
-## `--catalog`: duplicates across the whole catalog (platform admins)
-
-Only when `whoami.isPlatformAdmin` is true; anyone else gets "catalog mode is for the Yellowtail
-team" and the project run instead. It reads the catalog, not a project, and its only write is
-`merge_companies`.
-
-1. **Read.** `list_companies { kind: "investor", limit: 100 }` (or the kind the user names),
-   following `nextCursor` to the end, keeping id, name, `websiteUrl`, `linkedinUrl`, scope
-   (`workspaceId` null = shared) and people count. Say how many were read.
-2. **Group firms.** Same website domain (strip `www.` and the path), same LinkedIn company URL, or
-   names that are near-identical once "Ventures / Capital / Partners / VC / LLP" and punctuation are
-   set aside. For a name-only group, `search_companies { q: <name>, kind }` and keep it only where a
-   match has `name_similar` at 0.8 or more; below that it goes under **Look-alikes, not merged**.
-3. **Group people.** `list_people` for the same kind (`companyKind`), all pages: the same LinkedIn
-   URL, the same email, or the same full name at the same firm (or at two firms in one group above).
-4. **Pick the keeper** in each firm group: the shared-catalog one over a workspace copy (the tool
-   requires it), then the one with more people, deals and filled fields. Both must be the same kind.
-5. **Dry run.** `merge_companies { keepId, mergeIds, dryRun: true, reason }` per group (`reason` in
-   a sentence: "same website northwind.vc"). Show what would move: people, deals, signals, notes,
-   tags unioned, fields filled.
-6. **Cards**, one per group, then on approval `merge_companies` with the same ids and
-   **`dryRun: false`**. Report what moved and the kept firm's link.
-7. **People.** There is no people merge tool. A duplicate person at a firm that was just merged
-   often resolves itself (both now sit at the keeper: list them again). What is left is a checklist
-   for the admin panel, with the keeper suggested; never `delete_person` from here.
-8. **Unreviewed firms.** `search_notes { scope: "all", q: "Auto-filed by /find-investors, unreviewed" }`,
-   all pages: the firms `/find-investors` filed without a card. Report the count and list them
-   (firm, filed when, for which workspace) after the duplicates, each pointing at
-   `/create-investor` (enrich) or a merge if it is also in a group above. Checking one is
-   enriching it; once it is right, `update_note` drops the first line. Read-only here.
-
-```
-**Catalog duplicates** · investors · 1,214 firms read · 6 groups
-
-### 1. Northwind Capital ← Northwind Capital Partners
-- Keep: Northwind Capital (shared) · 4 people, 3 deals
-- Merge: Northwind Capital Partners (Atlas Advisory's own) · 1 person, 1 deal
-- Why: same website northwind.vc
-- Dry run: moves 1 person, 1 deal (Fernway · Seed 2026), 2 notes; adds tag Sweden; fills LinkedIn
-
-**Look-alikes, not merged** · "Lantern Ventures" (lanternvc.com) ↔ "Lantern Capital" (lantern.de), 0.74
-**People to resolve in the admin panel** · Sarah Lee ×2 at Northwind Capital (same LinkedIn) → keep the one on 3 deals
-**Unreviewed, auto-filed by /find-investors** · 14 firms · Kiln Climate (12 Oct, Atlas Advisory) · … → `/create-investor` to check
-
-Reply with any of: `approve all` · `approve 1` · `reject 1` · `1: keep the other one`
-```
-
 ## Rules specific to this skill
 
-- Never deletes, removes a contact or moves a deal between pipelines, and merges only in
-  `--catalog`, for a platform admin, after a dry run and an approval. Customers can't merge, and this
-  skill never routes around it.
+- Never deletes, removes a contact, merges, or moves a deal between pipelines. Customers can't
+  merge, and this skill never routes around it: duplicates go in the report for the team.
 - A fix needs evidence or the user's word. "Unknown" is a valid, reported state.
 
 ## What comes next

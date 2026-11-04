@@ -162,7 +162,7 @@ instructions and its `reference/` files before the first write. On top of them:
 - **Live from Yellowtail.** Every figure comes from a dataset that is a live query on the Yellowtail
   connector (`connector`: its name as this session lists it), calling the same read tool with the
   same arguments the skill used: `get_pipeline`, `list_deals`, `list_milestones`, `list_history`,
-  `list_pipelines`, `list_projects`. Each reader's page makes the call on **their own** Yellowtail
+  `list_pipelines`. Each reader's page makes the call on **their own** Yellowtail
   connection, so a founder who is a guest on the project sees the same dashboard held to their own
   access, and nobody sees more than Yellowtail would show them.
 - **Every Yellowtail list needs a loader.** Answers are `{ meta, items }`, not rows, and a page is

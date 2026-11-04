@@ -60,7 +60,7 @@ settings) fixes it.
 
 **Toolsets.** `whoami.toolsets.enabled` lists the tool groups this connection has; the plugin needs
 `catalog`, `tenancy`, `pipelines` and `enrichment` (the bare URL
-`https://www.yellowtail.club/api/mcp/admin` lists all four). Any of them missing → say which, what
+`https://www.yellowtail.club/api/mcp` lists all four). Any of them missing → say which, what
 stops working (`tenancy`: `/create-project`, `/add-user`; `pipelines`: rounds, deals and lists;
 `enrichment`: Hunter and `/export-list`), and show `toolsets.hint`, the URL to reconnect with, as
 it is. Don't build a URL yourself when the hint is there. A connection made from an old URL with

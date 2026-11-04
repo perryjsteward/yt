@@ -2,7 +2,7 @@
   "mcpServers": {
     "yellowtail": {
       "type": "http",
-      "url": "https://www.yellowtail.club/api/mcp/admin"
+      "url": "https://www.yellowtail.club/api/mcp"
     }
   }
 }

@@ -86,9 +86,9 @@ write help makes is the single change the user asked for, on approval.
    one command that does the whole job over a chain; prefer a read-only one when the user only
    asked to see something. On an advisor's Clients pipeline or for selling Yellowtail Raise, the
    `yt-raise` commands are the answer where it is installed (`/yt-raise:help` covers that side);
-   where it is not, say the job belongs to Yellowtail Raise and stop there. A desk command
-   (`/yt-raise:signal-intake`, `/yt-raise:backfill-deal-signals`, `/crm-hygiene --catalog`) is
-   recommended only to a platform admin.
+   where it is not, say the job belongs to Yellowtail Raise and stop there. Desk work (orders,
+   founder invites, signal intake, catalog merges) is the Yellowtail team's `yt-admin` plugin,
+   never recommended here.
 4. **Answer** in the format below. For one step, do it: a read is answered in a line or two
    (`show_results` on that read, its one card), ending with the command that goes further when
    there is an obvious one ("for the whole picture, `/yt:deal-review Lantern`"); a change is one
@@ -106,8 +106,6 @@ Short names here; write them in full (`/yt:find-investors`) in the answer.
 | Get started, check what's connected, switch project | `/setup` | the one it recommends | Yellowtail connected |
 | Set up a new client startup | `/create-project [url]` | `/add-user`, `/create-pipeline` | a workspace with room |
 | Give the founder access | `/add-user` | | owner or admin of the workspace |
-| Invite a founder you met to try Yellowtail themselves | `/invite-founder` | | a platform admin |
-| Deliver the investor lists customers have paid for | `/fulfil-orders` | | a platform admin |
 | Plan the round: size, instrument, sequence, dates | `/round-strategy` | `/create-pipeline` | a project |
 | Start the round itself | `/create-pipeline` | `/find-investors` | a project |
 | Find investors who fit | `/find-investors` | `/add-to-pipeline` or `/add-to-list` | project interests |

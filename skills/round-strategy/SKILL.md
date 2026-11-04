@@ -36,7 +36,7 @@ keeps its own set of dates in prose.
 | `list_project_notes` | What the team has already captured about investors | optional |
 | `update_pipeline` | Record the plan on the round (description, `target`, `currency`, `attributes`) — card first | optional |
 | `create_milestone`, `update_milestone` | Put the plan's dates on the timeline; move one with the reason as `note` — card first | optional |
-| `create_note` | A project note for an open decision about a date, next to the milestone's note — card first | optional |
+| `capture_note` | A project note for an open decision about a date, next to the milestone's note — card first | optional |
 | Docs (Google Drive `create_file`) | The plan document | optional; markdown otherwise |
 | Upload / Drive read | Deck, financial model, cap table, last investor update | optional, strongly preferred |
 

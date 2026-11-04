@@ -20,8 +20,6 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` first.
 | --- | --- | --- |
 | `whoami` | Workspaces (with role) and projects the user can reach; `activeProjectId`; `isPlatformAdmin` (may create tags, raise a project limit) | Yes |
 | `get_workspace` | Each workspace's `projectLimit` and its projects: how full it is, and a same-name project | Yes |
-| `update_workspace_plan` | `{ id, changes: { projectLimit } }`, platform admins only, when Step 0's answer was "raise the limit" | Only then |
-| `delete_project` | `{ id }`: freeing a slot the user chose in Step 0, or `undo` right after creating | Only then |
 | `list_tags` | Real tag ids for `stage`, `industry`, `geography`, `focus` (and `business_model` if useful). One call per kind, cached | Yes |
 | `create_tag` | `{ kind, name, parentId? }`: an approved **New tags** line, created before the interests are set. Anyone: industry (its group as `parentId`) and focus; stage and geography: platform admins only | On approve |
 | `create_project` | `{ workspaceId, project: { name, description } }` | Yes, on approve |
@@ -34,7 +32,7 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` first.
 
 `create_project`, `get_workspace`, `set_project_interests` and `set_active_project` are in the
 `tenancy` toolset. If they are missing, `whoami.toolsets.hint` gives the URL to reconnect with
-(the bare `https://www.yellowtail.club/api/mcp/admin` lists every default toolset); say so, point to
+(the bare `https://www.yellowtail.club/api/mcp` lists every default toolset); say so, point to
 `CONNECTORS.md`, and stop.
 
 ## Steps
@@ -54,7 +52,7 @@ client has no question tool, put them as one lettered block at the very top of t
 | Question | Ask when | Options |
 | --- | --- | --- |
 | **Which workspace?** | The user can reach more than one | Each workspace by name with its count, `Northbound Advisory · 4 of 5 projects`; a full one says so in its label, `Acme Ventures · full (5 of 5)`. The workspace of `activeProjectId` goes first, marked "(Recommended)". A platform admin sees every customer's: never pick for them |
-| **The workspace is full** | The chosen workspace (or the only one) is at its limit. If the workspace is still open, ask it as "if you pick a full one" | Raise the limit to N+1 (platform admins only: `update_workspace_plan`; a customer asks Yellowtail) · Free a slot (the user names the project to delete) · Use another workspace |
+| **The workspace is full** | The chosen workspace (or the only one) is at its limit. If the workspace is still open, ask it as "if you pick a full one" | Upgrade or ask Yellowtail for more projects (the app's Upgrade, or the team) · Free a slot (delete a project in the app's project settings, then come back) · Use another workspace |
 | **A project with this name exists** | Same or near name in the chosen workspace | Refresh that one (`update_project` + `set_project_interests`) · Create a second |
 | **Raising now?** *(optional)* | Only when the call is being made anyway for one of the above | Not raising · Pre-seed / Seed / Series A, with a rough size. The answer sharpens the stage tags; without it, research infers the round and the card says it is an inference |
 
@@ -62,9 +60,8 @@ Never make the call for the optional question alone. Skip any question the user'
 answers: "in YellowTail Club" settles the workspace, "it's a seed round" the round. Nothing open →
 no call; go straight to research.
 
-Act on the answers before researching: `update_workspace_plan { id, changes: { projectLimit } }` for
-a raised limit, `delete_project` for the slot the user named (after saying which project and that it
-cannot be undone), or switch workspace.
+Act on the answers before researching: switch workspace, or, for more room, stop and say what to do
+in the app (upgrade, ask the team, or delete a project in its settings) and pick up here after.
 
 ### 1. Research the startup
 
@@ -204,13 +201,14 @@ Interests set: 6 tags (Pre-seed, Seed · Robotics, Energy · United Kingdom, Eur
 Not established: revenue, round size
 Tag created: "Offshore energy" (industry, under Energy)   — or —   Used existing "Offshore wind" (same tag)
 Tags to ask the Yellowtail team for: none
-Undo or adjust: `undo` deletes it (and switches you back to <previous project>) · `name: …`,
+Undo or adjust: `undo` switches you back to <previous project> (delete this one in its settings) · `name: …`,
   `description: …`, `+ Climate` / `− Europe` change it in place
 ```
 
 When the request was the approval, the card from Step 3 goes above this, headed **Created** rather
-than numbered, so the user sees every interest and its reason. `undo` is `delete_project` on the new
-id, then `set_active_project` back to the `activeProjectId` Step 0 saw; an adjustment is
+than numbered, so the user sees every interest and its reason. `undo` is deleting the new project in
+the app's project settings (Yellowtail Club has no project delete), then `set_active_project` back to
+the `activeProjectId` Step 0 saw; an adjustment is
 `update_project` or `set_project_interests` (the full new set), then `get_project` to confirm.
 
 ## What comes next

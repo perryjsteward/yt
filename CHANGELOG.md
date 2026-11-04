@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0 (4 Nov 2026)
+
+- **Yellowtail Club is the customer plugin, on the customer connector.** `.mcp.json` now points at `https://www.yellowtail.club/api/mcp` (Yellowtail Club), not the admin endpoint, which is the Yellowtail team's only. Every skill uses customer tools alone.
+- **The desk moved to `yt-admin`** (Yellowtail Admin, `perryjsteward/yt-admin`): `/fulfil-orders`, `/invite-founder` and `/crm-hygiene --catalog` (now `/catalog-hygiene`) are gone from here.
+- `/create-project` no longer raises a workspace's project limit or deletes a project (ask the team, upgrade, or delete in the app's settings); `/round-strategy` saves its note with `capture_note`; `/draft-outreach` and `/create-investor` read notes with `list_project_notes`.
+
 ## 0.9.0 (3 Nov 2026)
 
 - **`/fulfil-orders`** (platform admins): work the order queue. When a customer buys their investor list or the annual licence, Yellowtail makes an order due in 48 hours, carrying a brief of the project and its interests frozen at purchase. This picks up the next one, builds a List in the customer's project of the 200 investors that fit the brief best (filing new firms from research where the catalog is thin, as `/find-investors` does), gives it a pass over, and delivers the order with that List, which emails the customer a link to it. Runs unattended on a schedule (`--deliver`), leaves an order it can't fill in progress with a note, and skips upgrades (the licence on top of a project's list), which have nothing to build. Uses the new order tools.

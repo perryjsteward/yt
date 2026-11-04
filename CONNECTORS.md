@@ -50,10 +50,12 @@ Yellowtail is an MCP server you sign in to with your Yellowtail account. There i
 The URL is your Yellowtail app's address plus the server path:
 
 ```
-https://www.yellowtail.club/api/mcp/admin
+https://www.yellowtail.club/api/mcp
 ```
 
-Customers connect through `/api/mcp/admin` for now and see only the tools their account may use.
+This is **Yellowtail Club**, the customer connector: your own workspaces and projects and the
+investor catalog. The Yellowtail team's desk connector, Yellowtail Admin, is separate and refuses
+everyone else; its plugin is `yt-admin`.
 With no `?toolsets=`, the server lists every tool group the plugin needs: `catalog`, `tenancy`,
 `pipelines` and `enrichment` (Hunter). A connector added earlier with
 `?toolsets=catalog,tenancy,pipelines` still works but has no Hunter tools and no `/export-list`:

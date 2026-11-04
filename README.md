@@ -27,7 +27,7 @@ In Claude Code:
 After installing, sign in to Yellowtail with `/mcp` → **yellowtail** → **Authenticate** (`CONNECTORS.md`
 has the steps, and the claude.ai / Desktop equivalent; `INSTALL.md` covers every way to install). Then run `/yt:setup`.
 
-The connector URL is the bare `https://www.yellowtail.club/api/mcp/admin`: with no `?toolsets=` it
+The connector is **Yellowtail Club**, the bare `https://www.yellowtail.club/api/mcp`: with no `?toolsets=` it
 lists every tool group the plugin uses (catalog, tenancy, pipelines and enrichment). A connection
 made from an older URL with `?toolsets=catalog,tenancy,pipelines` misses Hunter; `/setup` says so
 and gives the URL to reconnect with.
@@ -46,8 +46,6 @@ meetings; the rest add breadth.
 | **`/setup`** | What's connected and which account each connector is signed into, your active workspace and project, missing tool groups, and your writing voice for drafts |
 | **`/create-project <url>`** | Research a startup and create its project with the right interests |
 | **`/add-user`** | Invite the founder into their project as editor or viewer |
-| `/invite-founder` | Platform admins: invite a founder you met to make their own free account, after checking (and if thin, growing) the investors Yellowtail has for them |
-| `/fulfil-orders` | Platform admins: work the order queue — build each customer's paid investor list to its target (200), give it a pass over, and deliver it, which emails them; runs unattended on a schedule |
 | **`/create-pipeline`** | Set up a round: target in its own currency, round details, stages, and its dates on the round's timeline |
 
 **Investors**
@@ -105,7 +103,7 @@ meetings; the rest add breadth.
 | `/pipeline-review` | Round health: coverage, stuck deals, commitments against target; a short pre-launch view before outreach |
 | `/round-forecast` | Where the round will likely close, by when, and what that rests on; a short pre-launch view before outreach |
 | `/pass-analysis` | Why investors passed, the patterns, and what to change |
-| `/crm-hygiene` | Duplicates, missing contacts, stale deals, gaps, and plan vs record (deals and docs that disagree with the timeline), with fixes proposed; `--catalog` for platform admins merges duplicate firms |
+| `/crm-hygiene` | Duplicates, missing contacts, stale deals, gaps, and plan vs record (deals and docs that disagree with the timeline), with fixes proposed; the Yellowtail team merges duplicate firms |
 | `/portfolio-review` | Every client's round across the workspace, side by side |
 
 **Fundraising practice**
