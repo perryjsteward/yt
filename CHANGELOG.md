@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.0 (4 Nov 2026)
+
+- **`/create-investor` no longer offers to backfill a new tag across the catalog.** That was a desk
+  process offered to platform admins only, and the desk's processes live in `yt-admin`: it is
+  `/yt-admin:tag-backfill` now. Customers still tag the firms they file, as they file them.
+- House rules §2 (shared with `yt-admin` and `yt-raise`) names the desk's scheduled research as the
+  fourth exception to cards. Nothing in this plugin changes behaviour.
+
 ## 0.10.0 (4 Nov 2026)
 
 - **Yellowtail Club is the customer plugin, on the customer connector.** `.mcp.json` now points at `https://www.yellowtail.club/api/mcp` (Yellowtail Club), not the admin endpoint, which is the Yellowtail team's only. Every skill uses customer tools alone.

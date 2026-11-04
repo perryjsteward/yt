@@ -124,21 +124,6 @@ afterwards (`/add-to-pipeline`).
 13. **Report** (house rules §11): one line per card, **new** marked, where it was filed (`filedTo`),
     links `/investors/{companyId}` and `/investors/people/{personId}`, tags created or reused; then
     failures; then **Tags to ask the Yellowtail team for**.
-14. **Backfill a new tag (platform admins only).** After a tag is created, offer once: "Want me to
-    look for other firms that should carry Industrial AI?" On yes, it is card first, like everything
-    else:
-    - **Candidates** from firms carrying the parent tag (`list_companies` with `kind: "investor"`
-      and `tags` the parent's id; a parent filter includes its children) and from the research
-      notes you already have (`list_project_notes` with the tag's words as `query.q`).
-    - **Check each one** against the firm's own description and portfolio (`get_company`, its
-      `notable_investments`, its site when they are thin). A tag goes on only with a sentence that
-      supports it; "parent tag matches" is not a reason.
-    - **Propose retag cards in batches of about 15**: one line per firm, `tags { add: [new id] }`
-      (the parent stays), with the reason and its source. On approval, `file_investor` with
-      `company: { id, tags }` and the project's `workspaceId`, as for any retag. Then the next batch,
-      until the candidates run out or the user stops.
-
-    Customers don't get this offer: they retag the firms they work on as they file them.
 
 ## Rules that are easy to break
 
