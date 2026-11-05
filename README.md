@@ -30,7 +30,20 @@ has the steps, and the claude.ai / Desktop equivalent; `INSTALL.md` covers every
 The connector is **Yellowtail Club**, the bare `https://www.yellowtail.club/api/mcp`: with no `?toolsets=` it
 lists every tool group the plugin uses (catalog, tenancy, pipelines and enrichment). A connection
 made from an older URL with `?toolsets=catalog,tenancy,pipelines` misses Hunter; `/setup` says so
-and gives the URL to reconnect with.
+and gives the URL to reconnect with. In claude.ai or Claude Desktop, name the connector
+**Yellowtail Club**.
+
+Yellowtail has **two connectors**, and this plugin uses only the customer one:
+
+| Connector | URL | Answers | Plugins |
+| --- | --- | --- | --- |
+| **Yellowtail Club** | `https://www.yellowtail.club/api/mcp` | customers, and the Yellowtail team | `yt` (this one) |
+| **Yellowtail Admin** | `https://www.yellowtail.club/api/mcp/admin` | the Yellowtail team only | `yt-admin`, `yt-raise` |
+
+Yellowtail Club lists customer tools only, so nothing here reaches the desk's processes (orders,
+intake, the daily research): those are `yt-admin`'s. Customer access to Yellowtail Club is one switch the
+Yellowtail team turns on (`customer.mcp`); until it is, the connector answers the Yellowtail team
+only, and a customer's sign-in is refused with a 403.
 
 ## Commands
 
