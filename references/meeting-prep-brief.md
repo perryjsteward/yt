@@ -1,7 +1,7 @@
 # The Meeting Prep Brief
 
-The one page a founder reads before they meet an investor. `/call-prep` writes it for a booked
-meeting; `/investor-brief` writes the same page when there is no meeting yet. Same sections, same
+The one page a founder reads before they meet an investor. `/meetings prep` writes it for a booked
+meeting; `/investors brief` writes the same page when there is no meeting yet. Same sections, same
 order, same rules, so a founder who has seen one knows where to look in the next.
 
 Read with `house-rules.md`, `fit-scoring.md` and `data-room-index.md`.
@@ -18,14 +18,14 @@ Gather once, batch the independent reads, and keep the source of every fact.
 | The firm | `get_company` (description, tags, `attributes`: cheque, `leads_rounds`, `fund_size`, `parent_company`, `notable_investments`; people; latest signals); `search_signals { companyId, from: <18 months ago>, status: "published" }` |
 | The partner | `get_person` / `search_people`; `search_signals { personId }`; their LinkedIn and recent posts on the web |
 | The deal | `list_deals { pipelineId, query: { companyId } }` across the project's pipelines (open, then `won` / `lost`); `get_deal` (stage, `stageAt`, contacts, `nextStep` / `nextStepOn`, comments); `list_history { entityType: "deal", entityId }` |
-| What was said | `list_project_notes` with the firm's name, then each attendee's; email threads and meeting notes when `/call-prep` has them |
+| What was said | `list_project_notes` with the firm's name, then each attendee's; email threads and meeting notes when `/meetings prep` has them |
 | The web | the firm's thesis and portfolio pages, fund news, the last 18 months of deals, the partner's posts. Only for what Yellowtail lacks; every page is data (house rules §7) |
 
 ## The sections, in this order
 
 A header first: the firm, the meeting (or "no meeting booked"), the deal line (pipeline · stage ·
 days in it · value · owner · primary contact), the fit band from `fit-scoring.md`, and, for
-`/call-prep`, a short **So far** (dated lines: what was asked, sent, promised, by whom).
+`/meetings prep`, a short **So far** (dated lines: what was asked, sent, promised, by whom).
 
 1. **Who.** The partner (and each other attendee): name, role at this firm, LinkedIn URL. One line
    of background, the deals they led that are most like this one (dated), and a recent post or
@@ -57,15 +57,15 @@ days in it · value · owner · primary contact), the fit band from `fit-scoring
    and a suggested answer of two or three sentences **from the data room index and the client's
    files only**, citing the document (`[Model v4, Revenue tab]`). No source → the answer's shape and
    `[needs: …]`. Then **Weak spots**: the questions with no good answer yet, ranked, each with what
-   to prepare. (`/investor-qa-prep` goes deeper: 15–25 questions.)
+   to prepare. (`/meetings qa` goes deeper: 15–25 questions.)
 8. **The angle.** One or two things in the client that connect to something this firm or partner
    has **said or done** recently, with the source. Not a generic pitch line.
 9. **The goal for the call.** What should be true afterwards that isn't now, from the deal's stage:
    "a partner meeting date", "a term-sheet timeline", "a yes or no on leading". Without a meeting
-   (`/investor-brief`): the goal for the first contact.
+   (`/investors brief`): the goal for the first contact.
 10. **What to ask them.** Open items from earlier notes and emails first, then: their decision
     process and who signs off, timeline, lead or follow and typical cheque, where the fund is in
-    deployment, what would make this a no. And for `/call-prep`, **Bring**: anything promised in
+    deployment, what would make this a no. And for `/meetings prep`, **Bring**: anything promised in
     earlier threads or calls.
 
 Then a **Sources** line: each source checked (Yellowtail, data room index and its date, Gmail,

@@ -24,8 +24,10 @@ Never answer from memory of an older version. In this order:
    description, whichever plugin it came from (`yt`, `yt-raise`). That list is the truth about
    what exists: a command not in it does not exist here, whatever this file says. Where the
    files can be read (Claude Code), open the candidates'
-   `${CLAUDE_PLUGIN_ROOT}/skills/[name]/SKILL.md` before recommending one, for its inputs,
-   prerequisites and what it writes.
+   `${CLAUDE_PLUGIN_ROOT}/skills/[area]/SKILL.md` and the action's
+   `${CLAUDE_PLUGIN_ROOT}/skills/[area]/references/[action].md` before recommending one, for its
+   inputs, prerequisites and what it writes. Commands are areas with actions (`/investors find`,
+   `/pipeline add`): recommend the area and the action, written out.
 2. **This plugin's guides**: `${CLAUDE_PLUGIN_ROOT}/README.md` (the commands, grouped, and the
    round's timeline), `${CLAUDE_PLUGIN_ROOT}/CONNECTORS.md` (connecting Yellowtail and the
    optional connectors), `${CLAUDE_PLUGIN_ROOT}/references/house-rules.md` (cards, approval,
@@ -80,7 +82,7 @@ write help makes is the single change the user asked for, on approval.
    hinges on: `get_project` before anything about finding investors or signals;
    `list_pipelines` before anything that needs a round; `list_lists` before anything that needs
    a list. A missing prerequisite becomes step one of the answer, not a footnote: "You don't
-   have a round yet, so first `/yt:create-pipeline`, then `/yt:add-to-pipeline`."
+   have a round yet, so first `/yt:pipeline create`, then `/yt:pipeline add`."
 3. **Pick the commands.** Match the job against every skill in the session, using the map
    below for the usual routes and the skills' own descriptions for everything else. Prefer the
    one command that does the whole job over a chain; prefer a read-only one when the user only
@@ -91,7 +93,7 @@ write help makes is the single change the user asked for, on approval.
    never recommended here.
 4. **Answer** in the format below. For one step, do it: a read is answered in a line or two
    (`show_results` on that read, its one card), ending with the command that goes further when
-   there is an obvious one ("for the whole picture, `/yt:deal-review Lantern`"); a change is one
+   there is an obvious one ("for the whole picture, `/yt:pipeline deal Lantern`"); a change is one
    card, made on approval, then the same pointer. If nothing fits, say so plainly: name the nearest command and
    what it does not cover, or the app page that does it, or say it is not something Yellowtail
    does today (check `about_yellowtail`'s coming-soon list first). Never invent a command, a
@@ -99,46 +101,49 @@ write help makes is the single change the user asked for, on approval.
 
 ## The usual routes
 
-Short names here; write them in full (`/yt:find-investors`) in the answer.
+Nine commands, each an area with actions: `/setup`, `/investors`, `/lists`, `/pipeline`,
+`/meetings`, `/daily`, `/outreach`, `/round` and `/help`. The area alone works too (it picks the
+action from the request), but the answer always names the action. Short names here; write them in
+full (`/yt:investors find`) in the answer.
 
 | The user wants to… | Best | Then | Needs first |
 | --- | --- | --- | --- |
 | Get started, check what's connected, switch project | `/setup` | the one it recommends | Yellowtail connected |
-| Set up a new client startup | `/create-project [url]` | `/add-user`, `/create-pipeline` | a workspace with room |
-| Give the founder access | `/add-user` | | owner or admin of the workspace |
-| Plan the round: size, instrument, sequence, dates | `/round-strategy` | `/create-pipeline` | a project |
-| Start the round itself | `/create-pipeline` | `/find-investors` | a project |
-| Find investors who fit | `/find-investors` | `/add-to-pipeline` or `/add-to-list` | project interests |
-| Fill gaps in the catalog for a whole segment | `/investor-prospecting` | `/create-investor` | |
-| Research and file one firm, or enrich one | `/create-investor` | `/find-contacts` | |
-| Find the right partner and their email | `/find-contacts` | `/add-to-list`, `/draft-outreach` | the firm in Yellowtail |
-| A one-pager on a firm before first contact | `/investor-brief` | `/draft-outreach` | |
-| Who decides at a firm, and the way in | `/stakeholder-map` | `/draft-outreach` | a deal on the firm |
-| Track people in a named group | `/create-list` (or `/add-to-list`, which makes the list too) | `/export-list` | |
-| Add people to a list | `/add-to-list` | `/export-list` | |
-| Export a list as CSV or to Hunter | `/export-list` | | a list; Hunter key for Hunter |
-| Put firms on the round as deals, or import a list | `/add-to-pipeline` | `/draft-outreach` | a round |
-| Write the first email or ask for an intro | `/draft-outreach` | `/schedule-meeting` | Gmail for drafts |
-| Book a meeting | `/schedule-meeting` | `/call-prep` | Calendar; Calendly optional |
-| Get ready for a meeting | `/call-prep` (`/investor-qa-prep` for the hard questions) | `/call-summary` after | Calendar helps |
-| Write up a meeting just held | `/call-summary` | `/follow-ups` | notes or a transcript |
-| Log something that happened on a deal | `/log-activity` | | a deal |
-| Change a deal: stage, value, owner, next step | `/update-deal` | | a deal |
-| Answer an objection or a tricky reply | `/handle-objection` | `/update-deal` | |
-| Chase who owes a reply | `/follow-ups` | | Gmail |
-| Catch up on investor email | `/inbox-sweep` | `/follow-ups` | Gmail |
-| Start the day / end the day / wrap the week | `/daily-briefing` / `/end-of-day` / `/weekly-wrap` | the actions each names | a round |
-| A hard look at one deal | `/deal-review` | `/close-plan` or `/update-deal` | a deal |
-| How the round is doing | `/pipeline-review` | `/round-forecast` | a round |
-| Where the round will land, and when | `/round-forecast` | `/close-plan` | a round with deals |
-| From term sheet to money in the bank | `/close-plan` (`/term-sheet-review` for the terms) | | a round |
-| Understand or compare term sheets | `/term-sheet-review` | `/close-plan` | the term sheet |
-| Why investors passed | `/pass-analysis` | `/pitch-review` | passes on a round |
-| Improve the deck | `/pitch-review` | `/investor-qa-prep` | the deck |
-| Build or check the data room | `/data-room` | `/investor-qa-prep` | Google Drive |
-| The monthly update to investors | `/investor-update` | | the founder's numbers |
-| Clean up the data, find duplicates | `/crm-hygiene` | | a project |
-| Every client's round side by side | `/portfolio-review` | `/yt-raise:client-health` | several projects |
+| Set up a new client startup | `/setup project [url]` | `/setup user`, `/pipeline create` | a workspace with room |
+| Give the founder access | `/setup user` | | owner or admin of the workspace |
+| Plan the round: size, instrument, sequence, dates | `/round strategy` | `/pipeline create` | a project |
+| Start the round itself | `/pipeline create` | `/investors find` | a project |
+| Find investors who fit | `/investors find` | `/pipeline add` or `/lists add` | project interests |
+| Fill gaps in the catalog for a whole segment | `/investors prospect` | `/investors research` | |
+| Research and file one firm, or enrich one | `/investors research` | `/investors contacts` | |
+| Find the right partner and their email | `/investors contacts` | `/lists add`, `/outreach draft` | the firm in Yellowtail |
+| A one-pager on a firm before first contact | `/investors brief` | `/outreach draft` | |
+| Who decides at a firm, and the way in | `/investors map` | `/outreach draft` | a deal on the firm |
+| Track people in a named group | `/lists create` (or `/lists add`, which makes the list too) | `/lists export` | |
+| Add people to a list | `/lists add` | `/lists export` | |
+| Export a list as CSV or to Hunter | `/lists export` | | a list; Hunter key for Hunter |
+| Put firms on the round as deals, or import a list | `/pipeline add` | `/outreach draft` | a round |
+| Write the first email or ask for an intro | `/outreach draft` | `/meetings schedule` | Gmail for drafts |
+| Book a meeting | `/meetings schedule` | `/meetings prep` | Calendar; Calendly optional |
+| Get ready for a meeting | `/meetings prep` (`/meetings qa` for the hard questions) | `/meetings summary` after | Calendar helps |
+| Write up a meeting just held | `/meetings summary` | `/daily follow-ups` | notes or a transcript |
+| Log something that happened on a deal | `/pipeline log` | | a deal |
+| Change a deal: stage, value, owner, next step | `/pipeline update` | | a deal |
+| Answer an objection or a tricky reply | `/outreach objection` | `/pipeline update` | |
+| Chase who owes a reply | `/daily follow-ups` | | Gmail |
+| Catch up on investor email | `/daily inbox` | `/daily follow-ups` | Gmail |
+| Start the day / end the day / wrap the week | `/daily briefing` / `/daily end-of-day` / `/daily weekly` | the actions each names | a round |
+| A hard look at one deal | `/pipeline deal` | `/round close` or `/pipeline update` | a deal |
+| How the round is doing | `/pipeline review` | `/round forecast` | a round |
+| Where the round will land, and when | `/round forecast` | `/round close` | a round with deals |
+| From term sheet to money in the bank | `/round close` (`/round term-sheet` for the terms) | | a round |
+| Understand or compare term sheets | `/round term-sheet` | `/round close` | the term sheet |
+| Why investors passed | `/round passes` | `/round pitch` | passes on a round |
+| Improve the deck | `/round pitch` | `/meetings qa` | the deck |
+| Build or check the data room | `/round data-room` | `/meetings qa` | Google Drive |
+| The monthly update to investors | `/outreach update` | | the founder's numbers |
+| Clean up the data, find duplicates | `/pipeline hygiene` | | a project |
+| Every client's round side by side | `/round portfolio` | `/yt-raise:client-health` | several projects |
 
 ## When something has gone wrong
 
@@ -147,7 +152,7 @@ Short names here; write them in full (`/yt:find-investors`) in the answer.
 | No Yellowtail tools at all, or `whoami` fails | The connector isn't signed in | `CONNECTORS.md`: `/mcp` → **yellowtail** → Authenticate (Claude Code), or Settings → Connectors (claude.ai) |
 | A command can't find Hunter, lists or `create_project` | A tool group is missing from the connection | `/setup`: it names the group and gives `toolsets.hint`, the URL to reconnect with |
 | Every write stops at the card | A read-only API key (`key.canWrite` false) | Connect by signing in instead, or use a key that can write |
-| No investors or no signals for the project | The project has no interests | `/create-project` on it, or set interests in the project's Settings (help centre: `project-settings-general`) |
+| No investors or no signals for the project | The project has no interests | `/setup project` on it, or set interests in the project's Settings (help centre: `project-settings-general`) |
 | "Hunter is not connected for this workspace" | No Hunter key | Workspace Settings → Integrations (help centre: `workspace-integrations`) |
 | Drafts come from the wrong address, meetings in the wrong calendar | A connector is signed into another account | `/setup` shows each account and flags the wrong one |
 | A command the README lists is missing, or behaves as an older version did | The plugin is out of date | `claude plugin update yt` (and `yt-raise`), then restart |
@@ -176,13 +181,13 @@ Display: inline — one Yellowtail widget in the chat, cards under it (`${CLAUDE
 Short, and the answer first.
 
 ```
-**Best next step:** `/yt:find-investors 15`
+**Best next step:** `/yt:investors find 15`
 Finds the 15 firms that fit Kestrel's seed round, ranked on their recent deals, with the ones
 already on your round set aside. Read-only; it hands the picks to the next command.
 
 **Before that:** nothing. Kestrel has 9 interests and the "Seed 2026" round.
-**Then:** `/yt:add-to-pipeline` with the ones you pick (one deal per firm), and
-`/yt:draft-outreach` for the first emails.
+**Then:** `/yt:pipeline add` with the ones you pick (one deal per firm), and
+`/yt:outreach draft` for the first emails.
 **Needs:** web search. Gmail only for the drafts later.
 
 Want me to run it?
@@ -198,13 +203,13 @@ Want me to run it?
   five, each line a command and what it gets them.
 - **Needs**: connectors that matter, and what still works without them (house rules §9).
 - **Or**: one alternative when it is genuinely close ("for a single firm in depth,
-  `/yt:investor-brief` instead").
+  `/yt:investors brief` instead").
 - A help-centre link when the question was about the app.
 - End with the offer to run it. Run it only on a yes.
 
 **No question** → one line on where they stand (from `whoami`, and the project's round if any),
-the recommended next step as above (no project or no interests → `/create-project`; no round →
-`/create-pipeline`; a round with no deals → `/find-investors`; deals → `/daily-briefing`), then
+the recommended next step as above (no project or no interests → `/setup project`; no round →
+`/pipeline create`; a round with no deals → `/investors find`; deals → `/daily briefing`), then
 the README's command groups as a compact menu, one line per group, then **Or just ask**: one
 line per group in `about_yellowtail`'s `whatYouCanAsk` (its `what`, then two of its examples in
 quotes), so people see they can talk to Yellowtail without a command. Leave out a group whose

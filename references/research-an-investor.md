@@ -1,7 +1,7 @@
 # Researching an investor
 
-Used by `/create-investor`, `/find-contacts`, `/investor-prospecting` and the "new" rows of
-`/find-investors`: whenever a firm or person isn't in Yellowtail yet, and when filling the empty
+Used by `/investors research`, `/investors contacts`, `/investors prospect` and the "new" rows of
+`/investors find`: whenever a firm or person isn't in Yellowtail yet, and when filling the empty
 fields of one that is. The aim is a profile as complete as the public web supports, and **not one
 field more**. An empty field is honest; a guessed one is a bug every Yellowtail customer sees,
 because investors are filed to the **shared (global) catalog** (§ Where it files).
@@ -244,7 +244,7 @@ value came from and what wasn't found. Required for new records. It is how a tea
 later without redoing the work.
 
 ```
-Profile researched 9 Oct 2026 for /create-investor (project Voltframe).
+Profile researched 9 Oct 2026 for /investors research (project Voltframe).
 
 - Website, HQ, description, stages, leads rounds: https://quarrylane.vc/about
 - Fund size (Fund II, €80m ≈ $87m → $50M to $200M; vintage 2025): https://quarrylane.vc/news/fund-ii

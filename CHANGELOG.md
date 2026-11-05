@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.12.0 (5 Nov 2026)
+
+- **Nine commands instead of forty** (Perry, 5 Nov 2026). Each area is one command with an action
+  for each job, and each action's procedure is a reference read only when that action runs
+  (`skills/<area>/references/<action>.md`): `/setup`, `/investors`, `/lists`, `/pipeline`,
+  `/meetings`, `/daily`, `/outreach`, `/round` and `/help`. Name the action (`/yt:investors find`)
+  or give the area alone and say what you want. The procedures themselves are unchanged. The old
+  names are gone:
+
+  | Old → new |
+  | --- |
+  | `/setup` → `/setup` · `/create-project` → `/setup project` · `/add-user` → `/setup user` |
+  | `/find-investors` → `/investors find` · `/create-investor` → `/investors research` · `/investor-brief` → `/investors brief` · `/find-contacts` → `/investors contacts` · `/stakeholder-map` → `/investors map` · `/investor-prospecting` → `/investors prospect` |
+  | `/create-list` → `/lists create` · `/add-to-list` → `/lists add` · `/export-list` → `/lists export` |
+  | `/create-pipeline` → `/pipeline create` · `/add-to-pipeline` → `/pipeline add` · `/update-deal` → `/pipeline update` · `/log-activity` → `/pipeline log` · `/deal-review` → `/pipeline deal` · `/pipeline-review` → `/pipeline review` · `/crm-hygiene` → `/pipeline hygiene` |
+  | `/call-prep` → `/meetings prep` · `/call-summary` → `/meetings summary` · `/schedule-meeting` → `/meetings schedule` · `/investor-qa-prep` → `/meetings qa` |
+  | `/daily-briefing` → `/daily briefing` · `/end-of-day` → `/daily end-of-day` · `/weekly-wrap` → `/daily weekly` · `/follow-ups` → `/daily follow-ups` · `/inbox-sweep` → `/daily inbox` |
+  | `/draft-outreach` → `/outreach draft` · `/investor-update` → `/outreach update` · `/handle-objection` → `/outreach objection` |
+  | `/round-strategy` → `/round strategy` · `/round-forecast` → `/round forecast` · `/close-plan` → `/round close` · `/pass-analysis` → `/round passes` · `/term-sheet-review` → `/round term-sheet` · `/pitch-review` → `/round pitch` · `/data-room` → `/round data-room` · `/portfolio-review` → `/round portfolio` |
+
+- The marker on investors `/investors find` files stays `Auto-filed by /find-investors,
+  unreviewed`, so the desk still finds the ones filed before.
+- House rules and display guidance name the new commands (shared with `yt-raise` and `yt-admin`),
+  and house rules §2 names the desk's `/yt-admin:signals scan`.
+- `/help` and the README explain areas and actions.
+
 ## 0.11.0 (4 Nov 2026)
 
 - **`/create-investor` no longer offers to backfill a new tag across the catalog.** That was a desk

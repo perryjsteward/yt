@@ -15,7 +15,7 @@ file over them. These double as test cases: run each against a local Yellowtail 
 
 ### 1. Default run
 
-**Input**: `/find-investors`
+**Input**: `/investors find`
 
 **What the tools return, in this example**
 
@@ -57,7 +57,7 @@ person, a new tag or a retag written; any write with `--no-file`.
 
 ### 1b. Snapshot
 
-**Input**: `/find-investors --snapshot`
+**Input**: `/investors find --snapshot`
 
 **Expected**: exactly 20 rows, none of them a firm on any of the project's pipelines with status
 `won` (existing backers) or already open on the round; the header says "Snapshot: 20 firms,
@@ -68,8 +68,8 @@ existing backers excluded". Fewer than 20 that pass → say how many and why, ne
 **Input**: `add 1 2 to pipeline` · `create 9`, where 1 was in Yellowtail, 2 was just added and 9
 was not filed.
 
-**Expected**: `/add-to-pipeline` runs for rows 1 and 2 on Seed 2026 and shows its own cards (row 2
-has no people yet, so its card offers `/find-contacts` for the primary contact); `/create-investor`
+**Expected**: `/pipeline add` runs for rows 1 and 2 on Seed 2026 and shows its own cards (row 2
+has no people yet, so its card offers `/investors contacts` for the primary contact); `/investors research`
 runs for row 9, reusing the pages already read, and shows its card with the look-alike under **Needs
 your input**. Nothing is written until each command's approve. If the user had written
 `add 9 to pipeline`, row 9 isn't in Yellowtail: say it must be created first and offer `create 9`.
@@ -80,7 +80,7 @@ your input**. Nothing is written until each command's approve. If the user had w
 
 ### 3. A new firm with people
 
-**Input**: `/create-investor Kiln Climate`
+**Input**: `/investors research Kiln Climate`
 
 **Resolution**: `search_companies q="Kiln Climate"` → nothing. Research finds kiln.vc;
 `search_companies domain="kiln.vc"` → nothing → new. Hunter is connected: `domain_search { domain:
@@ -130,7 +130,7 @@ card files without it and lists it under **Tags to ask the Yellowtail team for**
 
 ### 4. A shared-catalog firm
 
-**Input**: `/create-investor Northwind Capital, and add Raj Patel`
+**Input**: `/investors research Northwind Capital, and add Raj Patel`
 
 **Resolution**: Northwind matches by domain; `workspaceId` and `projectId` are null → shared
 catalog. Its HQ looks wrong (site says Dublin), and it has no LinkedIn page on file.
@@ -149,7 +149,7 @@ Things that must NOT happen: a second, workspace-private Northwind created to ho
 
 ### 5. Ranking by fit, not seniority
 
-**Input**: `/find-contacts Northwind Capital`
+**Input**: `/investors contacts Northwind Capital`
 
 **Resolution**: Yellowtail has Sarah Lee (Partner, LinkedIn, no email). The team page lists a
 Managing Partner (generalist, last deal 2023), Raj Patel (Partner, led Gridly seed Jun 2026) and
@@ -173,14 +173,14 @@ Patel at Halcyon (a job move).
 
 ### 5b. A firm Yellowtail doesn't have
 
-**Input**: `/find-contacts www.madx.digital - just 5 new contacts`
+**Input**: `/investors contacts www.madx.digital - just 5 new contacts`
 
 **Resolution**: `search_companies` finds nothing by domain or name. madx.digital's home and about
 pages describe an SEO and digital-marketing agency; there is no portfolio, fund or investing page.
 
 **Expected**: "MADX Digital isn't in Yellowtail, and it doesn't look like an investor: it's an SEO
-and digital-marketing agency (madx.digital/about). Did you mean `/find-investors` — investors for
-MADX, if it's raising (or `/create-project` to set it up as a client first)? If MADX does invest and
+and digital-marketing agency (madx.digital/about). Did you mean `/investors find` — investors for
+MADX, if it's raising (or `/setup project` to set it up as a client first)? If MADX does invest and
 I've missed it, say so and I'll add it as an investor and find 5 contacts there." Nothing else is
 researched until the user answers.
 
@@ -199,7 +199,7 @@ without the user saying it invests; people researched or Hunter spent before the
 
 ### 6. A firm with history
 
-**Input**: `/investor-brief Lantern Ventures`
+**Input**: `/investors brief Lantern Ventures`
 
 **Resolution**: Lantern is on Seed 2026 at First meeting; `get_deal` shows primary contact Mira
 Osei and two comments ("Mira wants churn data", "Partner meeting pencilled for 15 Oct"). Lantern's
@@ -222,7 +222,7 @@ deal is already moving.
 
 ### 7. A segment
 
-**Input**: `/investor-prospecting UK climate pre-seed funds`
+**Input**: `/investors prospect UK climate pre-seed funds`
 
 **Expected**: one line mapping the segment to tags (Pre-seed · Climate Tech · United Kingdom ·
 Early-stage VC); "Yellowtail has 23 firms matching"; web discovery; then the triage report

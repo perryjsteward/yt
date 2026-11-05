@@ -12,15 +12,15 @@ the meeting time, and the skill works from that and says what it did not have.
 | Category | Required? | Works with | Used by |
 | --- | --- | --- | --- |
 | CRM | **Required** | Yellowtail (this plugin's `.mcp.json`) | every skill |
-| Hunter | Optional, advised | **Built into Yellowtail**: the workspace's own key, set in the app under Settings → Integrations. No connector to add | `find_email`, `verify_email`, `domain_search` in `/create-investor`, `/find-contacts`, `/investor-prospecting`, `/crm-hygiene`; `export_list` in `/export-list` |
-| Email | Optional | Gmail | `/setup` (your writing voice), `/add-user` (a personal note, or the invite when Yellowtail didn't email it), `/draft-outreach`, `/inbox-sweep` (it cannot read Spam), `/handle-objection`, `/call-summary`, `/call-prep`, `/daily-briefing`, `/end-of-day`, `/follow-ups`, `/deal-review`, `/pass-analysis`, `/round-forecast` |
-| Calendar | Optional | Google Calendar | `/call-prep`, `/schedule-meeting`, `/daily-briefing`, `/end-of-day`, `/weekly-wrap`, `/deal-review`, `/round-forecast` |
-| Scheduling links | Optional | Calendly | `/schedule-meeting`: a single-use link for a named event type (Discovery, Snapshot walkthrough, Kickoff, Close-out, an investor call type) |
-| Meeting notes | Optional | Otter, Fireflies, Granola, Wispr Flow, or a paste | `/call-summary`, `/call-prep`, `/end-of-day`, `/weekly-wrap`, `/deal-review`, `/pass-analysis` |
-| Docs | Optional | Google Drive | decks for `/create-project` and `/pitch-review`, `/round-strategy`, `/close-plan`, `/investor-update`, `/weekly-wrap`, `/data-room` and its index, `/call-prep` (the brief as a Doc), `/crm-hygiene` (a linked plan doc), `/export-list` (the CSV) |
+| Hunter | Optional, advised | **Built into Yellowtail**: the workspace's own key, set in the app under Settings → Integrations. No connector to add | `find_email`, `verify_email`, `domain_search` in `/investors research`, `/investors contacts`, `/investors prospect`, `/pipeline hygiene`; `export_list` in `/lists export` |
+| Email | Optional | Gmail | `/setup` (your writing voice), `/setup user` (a personal note, or the invite when Yellowtail didn't email it), `/outreach draft`, `/daily inbox` (it cannot read Spam), `/outreach objection`, `/meetings summary`, `/meetings prep`, `/daily briefing`, `/daily end-of-day`, `/daily follow-ups`, `/pipeline deal`, `/round passes`, `/round forecast` |
+| Calendar | Optional | Google Calendar | `/meetings prep`, `/meetings schedule`, `/daily briefing`, `/daily end-of-day`, `/daily weekly`, `/pipeline deal`, `/round forecast` |
+| Scheduling links | Optional | Calendly | `/meetings schedule`: a single-use link for a named event type (Discovery, Snapshot walkthrough, Kickoff, Close-out, an investor call type) |
+| Meeting notes | Optional | Otter, Fireflies, Granola, Wispr Flow, or a paste | `/meetings summary`, `/meetings prep`, `/daily end-of-day`, `/daily weekly`, `/pipeline deal`, `/round passes` |
+| Docs | Optional | Google Drive | decks for `/setup project` and `/round pitch`, `/round strategy`, `/round close`, `/outreach update`, `/daily weekly`, `/round data-room` and its index, `/meetings prep` (the brief as a Doc), `/pipeline hygiene` (a linked plan doc), `/lists export` (the CSV) |
 | E-sign | Optional | DocuSeal (planned), Docusign, SignNow, Jotform Sign | sending a document for signature, where a skill offers it. Detected by its tools, never assumed |
 | Other enrichment | Optional | Apollo, Clay (people, emails, phones); Crunchbase (rounds), as their own connectors | the same contact search, after Hunter |
-| Web | Optional, strongly advised | Claude's web search and fetch | `/create-project`, `/find-investors`, `/create-investor`, `/find-contacts`, `/investor-brief` |
+| Web | Optional, strongly advised | Claude's web search and fetch | `/setup project`, `/investors find`, `/investors research`, `/investors contacts`, `/investors brief` |
 
 What a missing connector means:
 
@@ -36,7 +36,7 @@ What a missing connector means:
   file each with exactly the status and source Hunter's answer gives: only Hunter's `valid` at a
   score of 90 or more is `verified` (house rules §5). Every lookup spends the workspace's Hunter
   quota, so `/setup` never tests the key; the first lookup shows whether it works.
-- **No Calendly**: `/schedule-meeting` finds times in Google Calendar or proposes them by email.
+- **No Calendly**: `/meetings schedule` finds times in Google Calendar or proposes them by email.
 - **No e-sign**: export the document to PDF and send it through your e-sign tool.
 - **No Yellowtail**: the skill stops. Nothing in this plugin works without it.
 
@@ -58,7 +58,7 @@ investor catalog. The Yellowtail team's desk connector, Yellowtail Admin, is sep
 everyone else; its plugin is `yt-admin`.
 With no `?toolsets=`, the server lists every tool group the plugin needs: `catalog`, `tenancy`,
 `pipelines` and `enrichment` (Hunter). A connector added earlier with
-`?toolsets=catalog,tenancy,pipelines` still works but has no Hunter tools and no `/export-list`:
+`?toolsets=catalog,tenancy,pipelines` still works but has no Hunter tools and no `/lists export`:
 `/setup` reads `whoami.toolsets` and shows the URL to reconnect with (`toolsets.hint`).
 
 ### Claude Code

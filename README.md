@@ -47,7 +47,13 @@ answers the Yellowtail team only and a customer's sign-in is refused with a 403.
 
 ## Commands
 
-Claude Code shows every command with the plugin's name in front, `/yt:find-investors`; the
+Nine commands, each an area with actions: `/setup`, `/investors`, `/lists`, `/pipeline`,
+`/meetings`, `/daily`, `/outreach`, `/round` and `/help`. Name the action (`/investors find`,
+`/pipeline add`), or give the area alone and say what you want: it picks the action. Each action's
+procedure is a reference inside its area (`skills/<area>/references/<action>.md`), read only when
+that action runs.
+
+Claude Code shows every command with the plugin's name in front, `/yt:investors find`; the
 tables use the short name. Commands in **bold** are the core of a round, from new client to first
 meetings; the rest add breadth.
 
@@ -57,79 +63,79 @@ meetings; the rest add breadth.
 | --- | --- |
 | `/help [question]` | Ask in your own words; get the best command for it, filled in, with what it needs first and what comes after |
 | **`/setup`** | What's connected and which account each connector is signed into, your active workspace and project, missing tool groups, and your writing voice for drafts |
-| **`/create-project <url>`** | Research a startup and create its project with the right interests |
-| **`/add-user`** | Invite the founder into their project as editor or viewer |
-| **`/create-pipeline`** | Set up a round: target in its own currency, round details, stages, and its dates on the round's timeline |
+| **`/setup project <url>`** | Research a startup and create its project with the right interests |
+| **`/setup user`** | Invite the founder into their project as editor or viewer |
+| **`/pipeline create`** | Set up a round: target in its own currency, round details, stages, and its dates on the round's timeline |
 
 **Investors**
 
 | Command | Does |
 | --- | --- |
-| **`/find-investors`** | Ranked shortlist for this round on evidence (recent deals, portfolio, thesis), inactive firms and portfolio conflicts flagged, firms already on your pipelines or lists left out (so `/find-investors 5` tops up a running round); no pipeline needed; `--snapshot` for exactly 20 |
-| `/investor-prospecting` | Firms Yellowtail is missing for a segment, proposed for filing |
-| **`/create-investor`** | Deep research on a firm, filed to Yellowtail's shared investor catalog for your workspace; no round needed |
-| **`/find-contacts`** | The partner at a firm most likely to take this round, and the others worth contacting, with sourced contact details (Hunter first when your workspace has a key; never a role inbox) |
-| `/investor-brief` | The Meeting Prep Brief for a firm you haven't met yet |
+| **`/investors find`** | Ranked shortlist for this round on evidence (recent deals, portfolio, thesis), inactive firms and portfolio conflicts flagged, firms already on your pipelines or lists left out (so `/investors find 5` tops up a running round); no pipeline needed; `--snapshot` for exactly 20 |
+| `/investors prospect` | Firms Yellowtail is missing for a segment, proposed for filing |
+| **`/investors research`** | Deep research on a firm, filed to Yellowtail's shared investor catalog for your workspace; no round needed |
+| **`/investors contacts`** | The partner at a firm most likely to take this round, and the others worth contacting, with sourced contact details (Hunter first when your workspace has a key; never a role inbox) |
+| `/investors brief` | The Meeting Prep Brief for a firm you haven't met yet |
 
 **Lists and pipeline**
 
 | Command | Does |
 | --- | --- |
-| `/create-list` | A named list of people to track |
-| `/add-to-list` | Add investors' contacts to a list |
-| `/export-list` | A list as a CSV (to Drive or the chat) or pushed to a Hunter Leads list; missing emails first |
-| **`/add-to-pipeline`** | One deal per firm on the round, or a whole list imported |
-| `/update-deal` | Move a stage, set value, owner, close date or next step, add a note |
+| `/lists create` | A named list of people to track |
+| `/lists add` | Add investors' contacts to a list |
+| `/lists export` | A list as a CSV (to Drive or the chat) or pushed to a Hunter Leads list; missing emails first |
+| **`/pipeline add`** | One deal per firm on the round, or a whole list imported |
+| `/pipeline update` | Move a stage, set value, owner, close date or next step, add a note |
 
 **The loop: email, calendar and meetings**
 
 | Command | Does |
 | --- | --- |
-| **`/call-prep`** | The Meeting Prep Brief: who, the fund, activity, recent deals and signals, conflicts, tensions, likely questions answered from the data room, the angle and the goal; several meetings at once; saved as a Doc on request |
-| **`/call-summary`** | Summary, what landed and what to improve, follow-up draft and proposed deal updates from a meeting's notes |
-| `/inbox-sweep` | Match investor email to deals; propose stage moves, comments and replies; reminds you to check Spam |
-| `/schedule-meeting` | Find a time or send a single-use Calendly link, draft the invite, log it on the deal |
-| `/log-activity` | Write a call, email or meeting onto the deal |
+| **`/meetings prep`** | The Meeting Prep Brief: who, the fund, activity, recent deals and signals, conflicts, tensions, likely questions answered from the data room, the angle and the goal; several meetings at once; saved as a Doc on request |
+| **`/meetings summary`** | Summary, what landed and what to improve, follow-up draft and proposed deal updates from a meeting's notes |
+| `/daily inbox` | Match investor email to deals; propose stage moves, comments and replies; reminds you to check Spam |
+| `/meetings schedule` | Find a time or send a single-use Calendly link, draft the invite, log it on the deal |
+| `/pipeline log` | Write a call, email or meeting onto the deal |
 
 **Your day**
 
 | Command | Does |
 | --- | --- |
-| `/daily-briefing` | Today's meetings, quiet deals, next steps due, the timeline at risk, replies waiting, top three actions |
-| `/end-of-day` | Close out the day: meetings logged, commitments captured, next steps set, milestones the day moved |
-| `/weekly-wrap` | The week in review: what moved, wins and passes, what slipped, the timeline at risk, next week's plan |
-| `/follow-ups` | Every follow-up owed or overdue across the round, with drafts |
+| `/daily briefing` | Today's meetings, quiet deals, next steps due, the timeline at risk, replies waiting, top three actions |
+| `/daily end-of-day` | Close out the day: meetings logged, commitments captured, next steps set, milestones the day moved |
+| `/daily weekly` | The week in review: what moved, wins and passes, what slipped, the timeline at risk, next week's plan |
+| `/daily follow-ups` | Every follow-up owed or overdue across the round, with drafts |
 
 **Deals**
 
 | Command | Does |
 | --- | --- |
-| `/deal-review` | One deal in depth: where it really stands, the risks and the next move |
-| `/handle-objection` | An investor's objection (or their latest reply, found for you) answered, from evidence, in your voice |
-| `/close-plan` | The steps from soft commit to money in the bank, dated and owned, planned against the round's legal close |
-| `/stakeholder-map` | Who decides at a firm, who you know, and who is missing |
+| `/pipeline deal` | One deal in depth: where it really stands, the risks and the next move |
+| `/outreach objection` | An investor's objection (or their latest reply, found for you) answered, from evidence, in your voice |
+| `/round close` | The steps from soft commit to money in the bank, dated and owned, planned against the round's legal close |
+| `/investors map` | Who decides at a firm, who you know, and who is missing |
 
 **Pipeline and forecast**
 
 | Command | Does |
 | --- | --- |
-| `/pipeline-review` | Round health: coverage, stuck deals, commitments against target; a short pre-launch view before outreach |
-| `/round-forecast` | Where the round will likely close, by when, and what that rests on; a short pre-launch view before outreach |
-| `/pass-analysis` | Why investors passed, the patterns, and what to change |
-| `/crm-hygiene` | Duplicates, missing contacts, stale deals, gaps, and plan vs record (deals and docs that disagree with the timeline), with fixes proposed; the Yellowtail team merges duplicate firms |
-| `/portfolio-review` | Every client's round across the workspace, side by side |
+| `/pipeline review` | Round health: coverage, stuck deals, commitments against target; a short pre-launch view before outreach |
+| `/round forecast` | Where the round will likely close, by when, and what that rests on; a short pre-launch view before outreach |
+| `/round passes` | Why investors passed, the patterns, and what to change |
+| `/pipeline hygiene` | Duplicates, missing contacts, stale deals, gaps, and plan vs record (deals and docs that disagree with the timeline), with fixes proposed; the Yellowtail team merges duplicate firms |
+| `/round portfolio` | Every client's round across the workspace, side by side |
 
 **Fundraising practice**
 
 | Command | Does |
 | --- | --- |
-| `/round-strategy` | Sizing, sequencing and tiering for the round, with the close dated backwards as a feasibility check and the dates put on its timeline |
-| `/draft-outreach` | Forwardable intro blurbs (one warm ask can cover several investors) and cold emails, in your voice or the founder's, as Gmail drafts |
-| `/pitch-review` | The deck, slide by slide, against what this round's investors look for |
-| `/investor-qa-prep` | The hard questions a firm will ask, with drafted answers |
-| `/investor-update` | The founder's monthly investor update |
-| `/term-sheet-review` | Term sheets explained and compared clause by clause, with a suggested action for each (not legal advice) |
-| `/data-room` | Build or check the data room, and keep its index: the note every investor answer is drawn from |
+| `/round strategy` | Sizing, sequencing and tiering for the round, with the close dated backwards as a feasibility check and the dates put on its timeline |
+| `/outreach draft` | Forwardable intro blurbs (one warm ask can cover several investors) and cold emails, in your voice or the founder's, as Gmail drafts |
+| `/round pitch` | The deck, slide by slide, against what this round's investors look for |
+| `/meetings qa` | The hard questions a firm will ask, with drafted answers |
+| `/outreach update` | The founder's monthly investor update |
+| `/round term-sheet` | Term sheets explained and compared clause by clause, with a suggested action for each (not legal advice) |
+| `/round data-room` | Build or check the data room, and keep its index: the note every investor answer is drawn from |
 
 Advisors running a client's raise: the weekly report to the founder is `/yt-raise:client-update`
 in the `yt-raise` plugin.
@@ -138,9 +144,9 @@ in the `yt-raise` plugin.
 
 A round's dates are milestones on its timeline (launch, lead term sheet, lead committed, legal
 close, and any of your own), shown on the pipeline page, where founders who are guests on the
-project see them too. `/create-pipeline` and `/round-strategy` set them, `/close-plan` moves them
-with the reason, and `/daily-briefing`, `/end-of-day`, `/weekly-wrap`, `/portfolio-review` and
-`/crm-hygiene` flag what is overdue or due soon. A round's target is in its own currency, and new
+project see them too. `/pipeline create` and `/round strategy` set them, `/round close` moves them
+with the reason, and `/daily briefing`, `/daily end-of-day`, `/daily weekly`, `/round portfolio` and
+`/pipeline hygiene` flag what is overdue or due soon. A round's target is in its own currency, and new
 deals take that currency.
 
 ## House rules

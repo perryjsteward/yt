@@ -1,7 +1,7 @@
 # Fit scoring
 
-How `/find-investors`, `/investor-brief`, `/call-prep` (through `meeting-prep-brief.md`) and
-`/investor-prospecting` say how well an investor fits.
+How `/investors find`, `/investors brief`, `/meetings prep` (through `meeting-prep-brief.md`) and
+`/investors prospect` say how well an investor fits.
 The score is a **band with its reasons**, never a number: "Strong — leads seed climate rounds in the
 UK, $1M–$3M cheques, led two grid-software seeds this year." A founder can check every word of that;
 "87/100" invites them to trust arithmetic on guesses.
@@ -103,7 +103,7 @@ Never present a band as more certain than its evidence: three unknowns and a sta
 
 ## Snapshot mode
 
-`/find-investors --snapshot` is the short list shown to a prospective client before they sign: it
+`/investors find --snapshot` is the short list shown to a prospective client before they sign: it
 must stand on its own. Exactly **20** firms, Strong first, then Good; Possible only to reach 20, and
 never a Poor or a **may be inactive** row. **Existing backers are excluded**: firms on any of the
 project's pipelines with status `won`, firms the project description names as investors, and any

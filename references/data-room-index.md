@@ -1,12 +1,12 @@
 # The data room index (the client's "AI brain")
 
 One project note that says what is in the client's data room, what each document says, the numbers
-that matter and where each comes from, and what is missing. `/data-room` writes it; every skill that
+that matter and where each comes from, and what is missing. `/round data-room` writes it; every skill that
 answers an investor's question for the client reads it **first**, so answers come from the client's
 own documents, cited, instead of from memory or a guess.
 
-Read by `/investor-qa-prep`, `/call-prep` and `/investor-brief` (through `meeting-prep-brief.md`),
-`/inbox-sweep`, `/handle-objection` and `/follow-ups`.
+Read by `/meetings qa`, `/meetings prep` and `/investors brief` (through `meeting-prep-brief.md`),
+`/daily inbox`, `/outreach objection` and `/daily follow-ups`.
 
 ## Finding it
 
@@ -16,9 +16,9 @@ Several → the newest, and say there are others. `get_note` for the whole body 
 only part of it.
 
 - **Found**: say its date ("Data room index, updated 8 Oct"). Older than 30 days, or older than a
-  document you can see was modified in Drive → say it may be stale and offer `/data-room --refresh`.
+  document you can see was modified in Drive → say it may be stale and offer `/round data-room --refresh`.
 - **Not found**: say so once ("No data room index for this project; answers come from what I can
-  read now. `/data-room` builds one."), then fall back to the client's files you can read (uploads,
+  read now. `/round data-room` builds one."), then fall back to the client's files you can read (uploads,
   Drive). Never invent the missing material.
 
 ## Answering from it
@@ -37,7 +37,7 @@ only part of it.
 
 ```
 # Data room index
-Project: Fernway · Seed 2026 · updated 9 Oct 2026 by /data-room · room: https://drive.google.com/drive/folders/…
+Project: Fernway · Seed 2026 · updated 9 Oct 2026 by /round data-room · room: https://drive.google.com/drive/folders/…
 
 ## Documents
 - **Deck v9** (02 Deck) · https://docs.google.com/… · modified 3 Oct 2026
@@ -60,7 +60,7 @@ Project: Fernway · Seed 2026 · updated 9 Oct 2026 by /data-room · room: https
 - No customer references named
 ```
 
-Rules for writing it (`/data-room` does this):
+Rules for writing it (`/round data-room` does this):
 
 - Every document: its title and folder, its Drive link, its last-modified date from Drive, and a
   2–4 line summary of what it actually says, with page or tab references for any figure.
