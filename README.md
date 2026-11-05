@@ -42,8 +42,8 @@ Yellowtail has **two connectors**, and this plugin uses only the customer one:
 
 Yellowtail Club lists customer tools only, so nothing here reaches the desk's processes (orders,
 intake, the daily research): those are `yt-admin`'s. Customer access to Yellowtail Club is one switch the
-Yellowtail team turns on (`customer.mcp`); until it is, the connector answers the Yellowtail team
-only, and a customer's sign-in is refused with a 403.
+Yellowtail team controls (`customer.mcp`), on since 5 Nov 2026; if it is ever off, the connector
+answers the Yellowtail team only and a customer's sign-in is refused with a 403.
 
 ## Commands
 
